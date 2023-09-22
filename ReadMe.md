@@ -16,7 +16,7 @@ We need you to code review the existing 'Add Timesheet' functionality and unit t
 
 ## Objective 2
 
-We need you to add functionality to the Timesheets web application so that all timesheets stored in memory can be viewed and sorted by total hours worked.
+We need you to add functionality to the Timesheets web application so that all timesheets stored in memory can be viewed and sorted by hours worked.
 
 **User Story: As a user I want to view all timesheets on the UI once several have been added so that I can determine who has logged the most hours against a project.**
 

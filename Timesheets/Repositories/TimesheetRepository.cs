@@ -19,7 +19,7 @@ namespace Timesheets.Repositories
         }
         public void AddTimesheet(Timesheet timesheet)
         {
-;           _context.Timesheets.Add(timesheet);
+            _context.Timesheets.Add(timesheet);
             _context.SaveChanges();
         }
 
