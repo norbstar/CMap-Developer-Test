@@ -40,7 +40,6 @@ function resetForm() {
     project.value = '';
     hoursWorked.value = '';
     submitButton.disabled = true;
-    generateSummaryButton.disabled = true;
 }
 
 window.onload = function (event) {
