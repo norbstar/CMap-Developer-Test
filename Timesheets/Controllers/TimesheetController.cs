@@ -1,9 +1,7 @@
 ﻿using System.Diagnostics;
-using System.Globalization;
+using System.Text;
 
 using Microsoft.AspNetCore.Mvc;
-
-using CsvHelper;
 
 using Timesheets.Models;
 using Timesheets.Services;
@@ -34,15 +32,16 @@ namespace Timesheets.Controllers
 
         public IActionResult ExportTimesheetsToCSVFile()
         {
-            using (var writer = new StreamWriter("Timesheets.csv"))
+            var sb = new StringBuilder();
+
+            sb.AppendLine("Id,Id,FirstName,LastName,Project,Hours,TotalHours");
+
+            foreach (var timesheet in _timesheetService.GetAll())
             {
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csv.WriteRecords(_timesheetService.GetAll());
-                }
+                sb.AppendLine(timesheet.Id + "," + timesheet.TimesheetEntry.Id + "," + timesheet.TimesheetEntry.FirstName + "," + timesheet.TimesheetEntry.LastName + "," + timesheet.TimesheetEntry.Project + "," + timesheet.TimesheetEntry.Hours + "," + timesheet.TotalHours);
             }
 
-            return RedirectToAction("Index");
+            return File(new UTF8Encoding().GetBytes(sb.ToString()), "text/csv", "Timesheets.csv");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
