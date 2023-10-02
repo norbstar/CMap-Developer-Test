@@ -1,5 +1,4 @@
-﻿using Timesheets.Infrastructure;
-using Timesheets.Models;
+﻿using Timesheets.Models;
 using Timesheets.Repositories;
 
 namespace Timesheets.Services
@@ -14,20 +13,10 @@ namespace Timesheets.Services
     {
         private readonly ITimesheetRepository _timesheetRepository;
 
-        public TimesheetService(ITimesheetRepository timesheetRepository)
-        {
-            _timesheetRepository = timesheetRepository;
-        }
+        public TimesheetService(ITimesheetRepository timesheetRepository) => _timesheetRepository = timesheetRepository;
 
-        public void Add(Timesheet timesheet)
-        {
-            _timesheetRepository.AddTimesheet(timesheet);
-        }
+        public void Add(Timesheet timesheet) => _timesheetRepository.AddTimesheet(timesheet);
 
-        public IList<Timesheet> GetAll()
-        {
-            var timesheets = _timesheetRepository.GetAllTimesheets();
-            return timesheets;
-        }
+        public IList<Timesheet> GetAll() => _timesheetRepository.GetAllTimesheets();
     }
 }

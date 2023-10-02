@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Timesheets.Models.Timesheet>
+
+@{
+    ViewData["Title"] = "Timesheet Viewer";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p class="lead">Lists all submitted timesheets by hours worked in descending order.</p>
+    <input type="button" value="Timesheets" class="btn btn-primary" id="timesheets" onclick="location.href='@Url.ActionLink("Index", "Timesheet")'" />
+    <hr class="my-4">
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            @Html.DisplayNameFor(model => model.TimesheetEntry.Date)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.TimesheetEntry.FirstName)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.TimesheetEntry.LastName)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.TimesheetEntry.Project)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.TimesheetEntry.Hours)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                @Html.DisplayFor(modelItem => item.TimesheetEntry.Date)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.TimesheetEntry.FirstName)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.TimesheetEntry.LastName)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.TimesheetEntry.Project)
+                </td>
+                <td>
+                @Html.DisplayFor(modelItem => item.TimesheetEntry.Hours)
+                </td>
+            </tr>
+    }
+    </tbody>
+</table>

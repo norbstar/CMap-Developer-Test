@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+
+using Microsoft.AspNetCore.Mvc;
+
 using Timesheets.Models;
 using Timesheets.Services;
 
@@ -7,17 +9,11 @@ namespace Timesheets.Controllers
 {
     public class TimesheetController : Controller
     {
-        private ITimesheetService _timesheetService;
+        private readonly ITimesheetService _timesheetService;
 
-        public TimesheetController(ITimesheetService timesheetService)
-        {
-            _timesheetService = timesheetService;
-        }
+        public TimesheetController(ITimesheetService timesheetService) => _timesheetService = timesheetService;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         [HttpPost]
         public ActionResult Index(TimesheetEntry timesheetEntry)
@@ -30,15 +26,10 @@ namespace Timesheets.Controllers
 
             _timesheetService.Add(timesheet);
 
-            var timesheets = _timesheetService.GetAll();
-
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

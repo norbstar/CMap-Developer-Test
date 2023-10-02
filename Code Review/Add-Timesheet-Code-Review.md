@@ -37,12 +37,12 @@ public ActionResult Index(TimesheetEntry timesheetEntry)
 
     _timesheetService.Add(timesheet);
 
-   --> var timesheets = _timesheetService.GetAll();
+   var timesheets = _timesheetService.GetAll();
 
     return View();
 }
 
-NOTE - The call to GetAll is redundant and can therefore safely be removed.
+NOTE - The call to GetAll is redundant in it's currently incarnation and can therefore safely be removed.
 
 This would be an obvious place to insert the validation code as the controller is the point of entry into the back end business logic. This would prevent invalid requests from being carried over into the service and enable the view to be modified to signify the error/s.
 
@@ -58,7 +58,7 @@ NOTE that TotalHours of the Timesheet class is mapped directly from the hours su
 
 Further more, if TotalHours is intended to be an aggregate of TimesheetEntry Hours, then the property would be need to be a list of type and not a single instance of type.
 
-Additionally, the Id fields of both Timesheet and TimesheetEntry are not explicitely populated prior to submission. Potentially these field are backfilled on a live database, but again serve no obvious purpose here.
+The Id fields of both Timesheet and TimesheetEntry are not explicitely populated prior to submission, but backfilled by way of the component model Key attribute.
 
 TimesheetService.cs
 public void Add(Timesheet timesheet) => _timesheetRepository.AddTimesheet(timesheet);
@@ -97,3 +97,11 @@ NOTE - There are a couple of places with redundent imports (via using).
 NOTE - There is flow in place to accomodate the submission of multiple timesheets against the same employee and project. The inclusion of the TotalHours field would seem to suggest that aggregation is being implied here. I can but speculate.
 
 NOTE - There are no checks in place to prevent a resubmission of a same date entry for the same first/last name. Maybe this is intentional, but seems like an odd choice.
+
+NOTE - There is no included web.config for handling custom errors and redirects. The consequence of this is that any server side errors thrown are made visible in the view which is a security issue.
+
+b) Unit test
+There is only one xunit test current defined which appears to be using the Moq open source library.
+
+NOTE - There are a number of redundent imports defined which may have been left in intentionally as a clue to which additional test cases are required.
+

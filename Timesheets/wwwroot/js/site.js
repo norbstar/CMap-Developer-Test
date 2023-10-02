@@ -17,7 +17,6 @@ const lastName = document.querySelector("#lastName");
 const project = document.querySelector("#project");
 const hoursWorked = document.querySelector("#hoursWorked");
 const submitButton = document.querySelector('#submitTimesheet');
-const generateSummaryButton = document.querySelector('#generateSummary');
 
 function validateForm() {
     submitButton.disabled = (firstName.value.length == 0) || (lastName.value.length == 0);

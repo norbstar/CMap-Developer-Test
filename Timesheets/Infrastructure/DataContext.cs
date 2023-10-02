@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Timesheets.Models;
 
 namespace Timesheets.Infrastructure
@@ -7,17 +8,13 @@ namespace Timesheets.Infrastructure
     {
         protected readonly IConfiguration Configuration;
 
-        public DataContext(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public DataContext(IConfiguration configuration) => Configuration = configuration;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-        {
-            // in memory database used for simplicity, change to a real db for production applications
-            options.UseInMemoryDatabase("TimesheetDB");
-        }
+        // An in memory database used for simplicity, change to a real db for production applications
+        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseInMemoryDatabase("TimesheetDB");
 
         public DbSet<Timesheet> Timesheets { get; set; }
+
+        public DbSet<TimesheetEntry> TimesheetsEntries { get; set; }
     }
 }

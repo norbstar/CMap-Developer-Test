@@ -1,11 +1,11 @@
 ﻿@model Timesheets.Models.TimesheetEntry
 
 @{
-    ViewData["Title"] = "CMAP Developer Test";
+    ViewData["Title"] = "Timesheets";
 }
 
 <div class="jumbotron">
-    <h1 class="display-4">Timesheets</h1>
+    <h1 class="display-4">@ViewData["Title"]</h1>
     <p class="lead">Get started by adding a timesheet below.</p>
     <hr class="my-4">
 </div>
@@ -79,5 +79,6 @@
         <p>
             View timesheets for multiple projects and sort by total hours worked to see where time is being spent.
         </p>
+        <input type="button" value="Generate View" class="btn btn-primary" id="generateView" onclick="location.href='@Url.ActionLink("Index", "TimesheetViewer")'" />
     </div>
 </div>

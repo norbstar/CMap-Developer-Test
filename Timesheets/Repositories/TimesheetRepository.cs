@@ -11,22 +11,21 @@ namespace Timesheets.Repositories
 
     public class TimesheetRepository : ITimesheetRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
-        public TimesheetRepository(DataContext context)
-        {
-            _context = context;
-        }
+        public TimesheetRepository(DataContext context) => _context = context;
+
         public void AddTimesheet(Timesheet timesheet)
         {
             _context.Timesheets.Add(timesheet);
+            _context.TimesheetsEntries.Add(timesheet.TimesheetEntry);
             _context.SaveChanges();
         }
 
         public IList<Timesheet> GetAllTimesheets()
         {
-            var timesheets = _context.Timesheets.ToList();
-            return timesheets;
+            var entries = _context.TimesheetsEntries.ToList();
+            return _context.Timesheets.ToList();
         }
     }
 }
