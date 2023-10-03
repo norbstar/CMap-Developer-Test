@@ -116,19 +116,30 @@ In this case it is just some instance of Timesheet (It.IsAny<Timesheet>()), the 
 
 **OBSERVATION** - There are a number of redundent imports defined which may have been left in intentionally as a clue to which additional test cases are required.
 
+GivenAValidTimesheet_VerifyAddTransactionWasPerformed
+Ensures that a transaction that takes a Timesheet reference was performed.
+
+**NOTE** - This orignal xunit text name change as it does not accurately describe the test as no data is actually stored
+
+GivenAValidTimesheet_VerifyTimesheetWasStored
+Will ensure that a Timesheet instance was successfullt stored in the database
+
+GivenAValidTimesheet_VerifyTimesheetStoredProperties
+Will ensure that the properties supplied for a valid timesheet are actually being stored as those properties in the database.
+
 GivenAValidTimesheet_VerifyTimesheetIdAsNonZeroPostSubmission
-Would ensure that the id field of a submitted timesheet is being updated to some non zero integer value in response to the [Key] attribution under control of the database.
+Will ensure that the id field of a submitted timesheet is being updated to some non zero integer value in response to the [Key] attribution under control of the database.
 
 GivenAValidTimesheet_VerifyTimesheetIdPostSubmission
-Would ensure that the id field of a submitted timesheet is being updated to a specific sequential integer value in response to the [Key] attribution under control of the database.
+Will ensure that the id field of a submitted timesheet is being updated to a specific sequential integer value in response to the [Key] attribution under control of the database.
 This would entail adding one or more timesheets as part of the same test and verifying that the id of the last entry corresponds to that expected based on sequential allocation.
 i.e. the third entry id would be 3
 
-GivenAValidTimesheet_VerifyTimesheetProperties
-Would ensure that the properties supplied for a valid timesheet are actually being stored as those properties in the database.
+GivenASetOfValidTimesheets_VerifyTimesheetSummaryDescendingOrdering
+Will ensure that the generated timesheet summary output is in descending order of hours
 
-GivenAValidTimesheet_VerifySortedTimesheetCount
-Fails if the sorted list size differs from the original GetAll list size
+GivenAValidTimesheet_VerifyGeneratedCSVLineCountAgainstDb
+Will ensure that if the sorted list size differs from the original list size, it will fail
 
 **OBSERVATION** - If the validation routines were in place to prevent an invalid timesheet from being submitted at the controller level and a suitable mechanism were put in place to provide feedback,
 a set of unit tests would be required to verify failure of various scenarios.
