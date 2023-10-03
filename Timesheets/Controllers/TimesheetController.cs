@@ -30,19 +30,7 @@ namespace Timesheets.Controllers
             return View();
         }
 
-        public IActionResult ExportTimesheetsToCSVFile()
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine("Id,FirstName,LastName,Project,Hours");
-
-            foreach (var timesheet in _timesheetService.GetAll())
-            {
-                sb.AppendLine(timesheet.Id + "," + timesheet.TimesheetEntry.FirstName + "," + timesheet.TimesheetEntry.LastName + "," + timesheet.TimesheetEntry.Project + "," + timesheet.TimesheetEntry.Hours);
-            }
-
-            return File(new UTF8Encoding().GetBytes(sb.ToString()), "text/csv", "Timesheets.csv");
-        }
+        public IActionResult ExportTimesheetsToCSVFile() => File(new UTF8Encoding().GetBytes(_timesheetService.FormatTimesheetDataAsCSV()), "text/csv", "Timesheets.csv");
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

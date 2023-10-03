@@ -11,7 +11,7 @@ namespace Timesheets.Controllers
 
         public TimesheetViewerController(ITimesheetService timesheetService) => _timesheetService = timesheetService;
 
-        private List<Timesheet> SortTimesheetsByHoursDescending(IList<Timesheet> timesheets) => timesheets.OrderByDescending(t => float.Parse(t.TimesheetEntry.Hours)).ToList();
+        private List<Timesheet> SortTimesheetsByHoursDescending(IList<Timesheet> timesheets) => _timesheetService.SortTimesheetsByHoursDescending(timesheets);
 
         public IActionResult Index() => View(SortTimesheetsByHoursDescending(_timesheetService.GetAll()));
     }
