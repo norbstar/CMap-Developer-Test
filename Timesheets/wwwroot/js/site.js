@@ -28,7 +28,6 @@ function onFirstNameChange() {
     validateForm();
 }
 
-
 lastName.addEventListener("input", function (event) {
     validateForm();
 });

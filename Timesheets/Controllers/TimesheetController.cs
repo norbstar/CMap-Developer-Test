@@ -34,11 +34,11 @@ namespace Timesheets.Controllers
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("Id,Id,FirstName,LastName,Project,Hours,TotalHours");
+            sb.AppendLine("Id,FirstName,LastName,Project,Hours");
 
             foreach (var timesheet in _timesheetService.GetAll())
             {
-                sb.AppendLine(timesheet.Id + "," + timesheet.TimesheetEntry.Id + "," + timesheet.TimesheetEntry.FirstName + "," + timesheet.TimesheetEntry.LastName + "," + timesheet.TimesheetEntry.Project + "," + timesheet.TimesheetEntry.Hours + "," + timesheet.TotalHours);
+                sb.AppendLine(timesheet.Id + "," + timesheet.TimesheetEntry.FirstName + "," + timesheet.TimesheetEntry.LastName + "," + timesheet.TimesheetEntry.Project + "," + timesheet.TimesheetEntry.Hours);
             }
 
             return File(new UTF8Encoding().GetBytes(sb.ToString()), "text/csv", "Timesheets.csv");
