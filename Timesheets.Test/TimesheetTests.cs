@@ -51,7 +51,6 @@ namespace Timesheets.Test
         public void GivenAValidTimesheet_VerifyGetAllTimesheetsTransactionWasPerformed()
         {
             // Arrange
-            var timesheet = BuildTimesheet();
             var mockRepository = new Mock<ITimesheetRepository>();
             mockRepository.Setup(repo => repo.GetAllTimesheets()).Returns(It.IsAny<IList<Timesheet>>);
 
@@ -62,6 +61,93 @@ namespace Timesheets.Test
 
             // Assert
             mockRepository.Verify(repo => repo.GetAllTimesheets(), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifyValidateTimesheetTransactionWasPerformed()
+        {
+            // Arrange
+            var timesheet = BuildTimesheet();
+            var mockRepository = new Mock<ITimesheetService>();
+            mockRepository.Setup(service => service.ValidateTimesheet(It.IsAny<Timesheet>()));
+
+            // Act
+            mockRepository.Object.ValidateTimesheet(timesheet);
+
+            // Assert
+            mockRepository.Verify(repo => repo.ValidateTimesheet(timesheet), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifyAddTransactionWasPerformed()
+        {
+            // Arrange
+            var timesheet = BuildTimesheet();
+            var mockRepository = new Mock<ITimesheetService>();
+            mockRepository.Setup(service => service.Add(It.IsAny<Timesheet>()));
+
+            // Act
+            mockRepository.Object.Add(timesheet);
+
+            // Assert
+            mockRepository.Verify(repo => repo.Add(timesheet), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifyGetAllWasPerformed()
+        {
+            // Arrange
+            var timesheet = BuildTimesheet();
+            var mockRepository = new Mock<ITimesheetService>();
+            mockRepository.Setup(service => service.GetAll()).Returns(It.IsAny<IList<Timesheet>>);
+
+            // Act
+            mockRepository.Object.GetAll();
+
+            // Assert
+            mockRepository.Verify(repo => repo.GetAll(), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifySortTimesheetsByHoursDescendingTransactionWasPerformed()
+        {
+            // Arrange
+            List<Timesheet> timesheets = new List<Timesheet>()
+            {
+                BuildTimesheet(9f),
+                BuildTimesheet(12f),
+                BuildTimesheet(2.5f)
+            };
+
+            var mockRepository = new Mock<ITimesheetService>();
+            mockRepository.Setup(service => service.SortTimesheetsByHoursDescending(It.IsAny<List<Timesheet>>()));
+
+            // Act
+            mockRepository.Object.SortTimesheetsByHoursDescending(timesheets);
+
+            // Assert
+            mockRepository.Verify(repo => repo.SortTimesheetsByHoursDescending(timesheets), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifyFormatTimesheetDataAsCSVTransactionWasPerformed()
+        {
+            // Arrange
+            List<Timesheet> timesheets = new List<Timesheet>()
+            {
+                BuildTimesheet(9f),
+                BuildTimesheet(12f),
+                BuildTimesheet(2.5f)
+            };
+
+            var mockRepository = new Mock<ITimesheetService>();
+            mockRepository.Setup(service => service.FormatTimesheetDataAsCSV()).Returns(It.IsAny<String>);
+
+            // Act
+            mockRepository.Object.FormatTimesheetDataAsCSV();
+
+            // Assert
+            mockRepository.Verify(repo => repo.FormatTimesheetDataAsCSV(), Times.Once);
         }
 
         [Fact]
