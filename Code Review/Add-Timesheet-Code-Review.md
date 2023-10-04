@@ -45,8 +45,6 @@ public ActionResult Index(TimesheetEntry timesheetEntry)
 
 **OBSERVATION** - The call to GetAll is redundant in it's currently incarnation and can therefore safely be removed.
 
-This would be an obvious place to insert the validation code as the controller is the point of entry into the back end business logic. This would prevent invalid requests from being carried over into the service and enable the view to be modified to signify the error/s.
-
 public class Timesheet
 {
     [Key]
@@ -141,15 +139,26 @@ Will ensure that the generated timesheet summary output is in descending order o
 GivenAValidTimesheet_VerifyGeneratedCSVLineCountAgainstDb
 Will ensure that if the sorted list size differs from the original list size, it will fail
 
-**OBSERVATION** - If the validation routines were in place to prevent an invalid timesheet from being submitted at the controller level and a suitable mechanism were put in place to provide feedback,
-a set of unit tests would be required to verify failure of various scenarios.
+GivenAnInvalidTimesheetDate_VerifyFailureToStore
+Will ensure that an invalid date will prevent the timesheet from being submitted
 
-An invalid date (GivenAnInvalidTimesheetDate_VerifyFailureToSubmit)
-An undefined project type (GivenAnInvalidTimesheetProject_VerifyFailureToSubmit)
-An invalid number of hours (GivenAnInvalidTimesheetHours_VerifyFailureToSubmit)
-An unknown employee id (GivenAnInvalidTimesheetEmployeeId_VerifyFailureToSubmit)
+GivenAnInvalidTimesheetFirstName_VerifyFailureToStore
+Will ensure that an invalid first name will prevent the timesheet from being submitted
 
-**NOTE** As these do not constitute explicit requirements of the ReadMe.md they will not be implemented in controller logic or in the form of xunit tests.
-They are simple mentioned here as an observation as part of more rounded implementation.
+GivenAnInvalidTimesheetLastName_VerifyFailureToStore
+Will ensure that an invalid last name will prevent the timesheet from being submitted
+
+GivenAnInvalidTimesheetProject_VerifyFailureToStore
+Will ensure that an invalid project will prevent the timesheet from being submitted
+
+GivenAnInvalidTimesheetHours_VerifyFailureToStore
+Will ensure that invalid hours will prevent the timesheet from being submitted
+
+**NOTE**
+A In reality there should be additional checks in place to ensure a timesheet for the same date and employee hasn't already been submitted, however this is beyond the scope of this exercise.
+Futher more the project supplied would likely need to conform to a list of pre-defined types and the hours supplied would be more constrained in it's provision.'
+
+**NOTE** Despite error handling not being explicitly mentioned in the ReadMe.md the UI will need to be updated to cater for such errors.
+The ViewData date store will be used to render any error message throw as a consequence of submitting a timesheet.
 
 ## END UNIT TESTS

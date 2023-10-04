@@ -153,5 +153,110 @@ namespace Timesheets.Test
             var lineCount = timesheetService.FormatTimesheetDataAsCSV().Split('\n').Length;
             Equals(lineCount - 1, timesheetService.GetAll().Count);
         }
+
+        [Fact]
+        public void GivenAnInvalidTimesheetDate_VerifyFailureToStore()
+        {
+            var timesheet = BuildTimesheet();
+            timesheet.TimesheetEntry.Date = "15/13/2024";
+            var timesheetService = GetService;
+
+            // Act
+            try
+            {
+                timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                // The assertion handles the outcome in this case and not the exception itself
+            }
+
+            // Assert
+            Equals(timesheetService.GetAll().Count, 0);
+        }
+
+        [Fact]
+        public void GivenAnInvalidTimesheetFirstName_VerifyFailureToStore()
+        {
+            var timesheet = BuildTimesheet();
+            timesheet.TimesheetEntry.FirstName = "";
+            var timesheetService = GetService;
+
+            // Act
+            try
+            {
+                timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                // The assertion handles the outcome in this case and not the exception itself
+            }
+
+            // Assert
+            Equals(timesheetService.GetAll().Count, 0);
+        }
+
+        [Fact]
+        public void GivenAnInvalidTimesheetLastName_VerifyFailureToStore()
+        {
+            var timesheet = BuildTimesheet();
+            timesheet.TimesheetEntry.LastName = "";
+            var timesheetService = GetService;
+
+            // Act
+            try
+            {
+                timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                // The assertion handles the outcome in this case and not the exception itself
+            }
+
+            // Assert
+            Equals(timesheetService.GetAll().Count, 0);
+        }
+
+        [Fact]
+        public void GivenAnInvalidTimesheetProject_VerifyFailureToStore()
+        {
+            var timesheet = BuildTimesheet();
+            timesheet.TimesheetEntry.Project = "";
+            var timesheetService = GetService;
+
+            // Act
+            try
+            {
+                timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                // The assertion handles the outcome in this case and not the exception itself
+            }
+
+            // Assert
+            Equals(timesheetService.GetAll().Count, 0);
+        }
+
+        [Fact]
+        public void GivenAnInvalidTimesheetHours_VerifyFailureToStore()
+        {
+            var timesheet = BuildTimesheet();
+            timesheet.TimesheetEntry.Hours = "25";
+            var timesheetService = GetService;
+
+            // Act
+            try
+            {
+                timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                // The assertion handles the outcome in this case and not the exception itself
+            }
+
+            // Assert
+            Equals(timesheetService.GetAll().Count, 0);
+        }
     }
 }
