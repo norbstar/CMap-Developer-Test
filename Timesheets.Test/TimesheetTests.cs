@@ -31,7 +31,7 @@ namespace Timesheets.Test
         }
 
         [Fact]
-        public void GivenAValidTimesheet_VerifyAddTransactionWasPerformed()
+        public void GivenAValidTimesheet_VerifyAddTimesheetTransactionWasPerformed()
         {
             // Arrange
             var timesheet = BuildTimesheet();
@@ -45,6 +45,23 @@ namespace Timesheets.Test
 
             // Assert
             mockRepository.Verify(repo => repo.AddTimesheet(timesheet), Times.Once);
+        }
+
+        [Fact]
+        public void GivenAValidTimesheet_VerifyGetAllTimesheetsTransactionWasPerformed()
+        {
+            // Arrange
+            var timesheet = BuildTimesheet();
+            var mockRepository = new Mock<ITimesheetRepository>();
+            mockRepository.Setup(repo => repo.GetAllTimesheets()).Returns(It.IsAny<IList<Timesheet>>);
+
+            var timesheetService = new TimesheetService(mockRepository.Object);
+
+            // Act
+            timesheetService.GetAll();
+
+            // Assert
+            mockRepository.Verify(repo => repo.GetAllTimesheets(), Times.Once);
         }
 
         [Fact]
