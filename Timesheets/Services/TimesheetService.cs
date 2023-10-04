@@ -35,22 +35,22 @@ namespace Timesheets.Services
 
             if (timesheet.TimesheetEntry.FirstName == null || timesheet.TimesheetEntry.FirstName.Length == 0)
             {
-                throw new ArgumentException("The First Name field is invalid");
+                throw new ArgumentException("The First Name field is invalid!");
             }
 
             if (timesheet.TimesheetEntry.LastName == null || timesheet.TimesheetEntry.LastName.Length == 0)
             {
-                throw new ArgumentException("The Last Name field is invalidh");
+                throw new ArgumentException("The Last Name field is invalid!");
             }
 
             if (timesheet.TimesheetEntry.Project == null || timesheet.TimesheetEntry.Project.Length == 0)
             {
-                throw new ArgumentException("The Project field is invalid");
+                throw new ArgumentException("The Project field is invalid!");
             }
 
             if (timesheet.TimesheetEntry.Hours == null || float.Parse(timesheet.TimesheetEntry.Hours) > 24)
             {
-                throw new ArgumentException("The Hours field is invalid");
+                throw new ArgumentException("The Hours field is invalid!");
             }
         }
 
