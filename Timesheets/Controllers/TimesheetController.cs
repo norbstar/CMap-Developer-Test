@@ -14,7 +14,11 @@ namespace Timesheets.Controllers
 
         public TimesheetController(ITimesheetService timesheetService) => _timesheetService = timesheetService;
 
-        public IActionResult Index() => View();
+        public IActionResult Index()
+        {
+            ViewData["ErrorMsg"] = "";
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Index(TimesheetEntry timesheetEntry)
@@ -25,7 +29,17 @@ namespace Timesheets.Controllers
                 TotalHours = timesheetEntry.Hours
             };
 
-            _timesheetService.Add(timesheet);
+            try
+            {
+                _timesheetService.Add(timesheet);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentException)
+                {
+                    ViewData["ErrorMsg"] = ex.Message;
+                }
+            }
 
             return View();
         }
